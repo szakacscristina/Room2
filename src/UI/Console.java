@@ -35,7 +35,7 @@
                 } else if (option.equals("2")) {
                     handleHotelExit();
                 } else if (option.equals("3")) {
-                    handlenumberOfpersonsReport();
+                    handlenumberOfpersonsFeedback();
                 } else if (option.equals("a")) {
                     handleShowAll();
                 } else if (option.equals("x")) {
@@ -44,22 +44,21 @@
             }
         }
 
-        private void handlenumberOfpersonsReport() {
-            for (Object numberOfpersonsAverage : service.getnumberOfpersonsRatingAverages())
+        private void handlenumberOfpersonsFeedback() {
+            for (NumberOfPersonsAverageRatingViewModel numberOfpersonsAverage : service.getnumberOfpersonsRatingAverages())
                 System.out.println(numberOfpersonsAverage);
         }
 
         private void handleHotelExit() {
             try {
                 System.out.println("Dati numarul de persoane:");
-                int stand = Integer.parseInt(scanner.nextLine());
+                int numberOfpersons = Integer.parseInt(scanner.nextLine());
                 System.out.println("Dati feedback de hotel:");
-                String report = scanner.nextLine();
+                String feedback = scanner.nextLine();
                 System.out.println("Dati rating-ul:");
                 int rating = Integer.parseInt(scanner.nextLine());
 
-                int numberOfpersons = 0;
-                String feedback = null;
+
                 service.exitHotel(numberOfpersons, feedback, rating);
             } catch (RuntimeException runtimeException) {
                 System.out.println("Avem erori: " + runtimeException.getMessage());
@@ -67,7 +66,7 @@
         }
 
         private void handleShowAll() {
-            for (Object r : service.getAll())
+            for (Room r : service.getAll())
                 System.out.println(r);
         }
 
@@ -77,14 +76,13 @@
                 System.out.println("Dati id-ul:");
                 int id = Integer.parseInt(scanner.nextLine());
                 System.out.println("Dati numarul de persoane:");
-                int stand = Integer.parseInt(scanner.nextLine());
+                int numberOfpersons = Integer.parseInt(scanner.nextLine());
                 System.out.println("Dati numarul camerei:");
-                String license = scanner.nextLine();
+                int roomnumber = Integer.parseInt(scanner.nextLine());
                 System.out.println("Dati numarul de zile:");
                 int days = Integer.parseInt(scanner.nextLine());
 
-                int numberOfpersons = 0;
-                int roomnumber = 0;
+
                 service.enterHotel(id, numberOfpersons, roomnumber, days);
             } catch (RuntimeException runtimeException) {
                 System.out.println("Avem erori: " + runtimeException.getMessage());

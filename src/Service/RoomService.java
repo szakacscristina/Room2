@@ -6,7 +6,7 @@ import Repository.RoomRepository;
 
 import java.util.*;
 
-    public class RoomService<roomDependingonnumberOfpersons, room> {
+    public class RoomService {
 
         private RoomRepository repository;
 
@@ -64,9 +64,8 @@ import java.util.*;
 
         public List<NumberOfPersonsAverageRatingViewModel> getnumberOfpersonsRatingAverages() {
             List<NumberOfPersonsAverageRatingViewModel> results = new ArrayList<>();
-            Map<Integer, List<Integer>> RatesFornumberOfpersons = new HashMap<>();
 
-            WeakHashMap<Integer, ArrayList> ratingsfornumberOfpersons = new WeakHashMap<>();
+            Map<Integer, List<Integer>> ratingsfornumberOfpersons = new HashMap<>();
             for (Room r : repository.getAll()) {
                 if (r.isLeftHotel()) {
                     int numberOfpersons = r.getNumberOfpersons();
@@ -79,14 +78,14 @@ import java.util.*;
                 }
             }
 
-            for (Object numberOfpersons : ratingsfornumberOfpersons.keySet()) {
-                List<Integer> ratings = (List<Integer>) ratingsfornumberOfpersons.get(numberOfpersons);
+            for (Integer numberOfpersons : ratingsfornumberOfpersons.keySet()) {
+                List<Integer> ratings = ratingsfornumberOfpersons.get(numberOfpersons);
                 int average = 0;
                 for (int p : ratings) {
                     average += p;
                 }
                 average /= ratings.size();
-                results.add(new NumberOfPersonsAverageRatingViewModel((Integer) numberOfpersons, average));
+                results.add(new NumberOfPersonsAverageRatingViewModel(numberOfpersons, average));
             }
 
 //        results.sort((r1, r2) -> r1.getAverageRating() > r2.getAverageRating() ? -1 : 1);
